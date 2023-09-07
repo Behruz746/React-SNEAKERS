@@ -8,7 +8,7 @@ import cardsObj from "../constants/index.js";
 
 function Cards() {
   return (
-    <div className="d-flex align-center justify-between mt-40">
+    <div className="d-flex align-center justify-between mt-40 Cards">
       {cardsObj.map((data) => {
         return (
           <div className="card" key={uuidv4()}>
