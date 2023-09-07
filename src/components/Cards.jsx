@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 // Images
-import { plusIcon } from "../assets/index.js";
+import { plusIcon, heart, heart_active } from "../assets/index.js";
 
 // card Data
 import cardsObj from "../constants/index.js";
@@ -12,6 +12,11 @@ function Cards() {
       {cardsObj.map((data) => {
         return (
           <div className="card" key={uuidv4()}>
+            
+            <div className="favorite">
+              <img src={heart} alt="heart" />
+            </div>
+
             <img width={133} height={112} src={data.image} alt="Shoes image" />
             <h5>{data.title}</h5>
             <div className="d-flex justify-between align-center">

@@ -4,6 +4,7 @@
   padding: 0;
   list-style: none;
   text-decoration: none;
+  font-family: 'Inter', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -60,6 +61,14 @@ header {
   line-height: normal;
 }
 
+.content__title {
+  color: #000;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
 .Cards {
   flex-wrap: wrap;
   gap: 20px;
@@ -70,6 +79,22 @@ header {
   padding: 30px;
   width: 220px;
   border-radius: 40px;
+  transition: .2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.06);
+    transform: translateY(-5px);
+  }
+
+  .favorite {
+    position: absolute;
+    cursor: pointer;
+
+    img {
+      width: 32px;
+      height: auto;
+    }
+  }
 
   span {
     color: #BDBDBD;
@@ -106,4 +131,93 @@ header {
   border: 0;
   outline: 0;
   cursor: pointer;
+}
+
+.search__block {
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  padding: 0 15px;
+  position: relative;
+
+  input {
+    border: 0;
+    outline: 0;
+    padding: 13px;
+    font-size: 16px;
+    max-width: 200px;
+    width: 100%;
+  }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+
+  .drawer__block {
+    position: absolute;
+    width: 420px;
+    height: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1); 
+    padding: 30px;
+
+    h2 {
+      margin: 0;
+      color: #000;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+}
+
+.cart__item {
+  margin-top: 30px;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #f3f3f3;
+  overflow: hidden;
+
+  p {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+  b {
+    color: #000;
+    font-size: 14px;
+    font-style: normal; 
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .remove__btn {
+    opacity: .7;
+    transition: opacity .15s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.cart__item-img {
+  background-position: -1px -3px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 70px;
+  height: 70px;
+  margin-right: 20px;
 }
