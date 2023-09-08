@@ -6,6 +6,7 @@ import search from './svg/search.svg';
 import heart from './svg/heart.svg';
 import heart_active from './svg/heart-active.svg';
 import remove_btn from './svg/remove-btn.svg';
+import arrow from './svg/arrow.svg';
 
 import shoes01 from './png/shoes01.png';
 import shoes02 from './png/shoes02.png';
@@ -20,6 +21,7 @@ export {
     heart,
     heart_active,
     remove_btn,
+    arrow,
     search,
     shoes01,
     shoes02,

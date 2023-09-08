@@ -157,29 +157,119 @@ header {
   top: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 9;
+}
 
-  .drawer__block {
-    position: absolute;
-    width: 420px;
-    height: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1); 
-    padding: 30px;
+.drawer__block {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d00;
+  position: absolute;
+  width: 420px;
+   height: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1); 
+  padding: 30px;
 
-    h2 {
-      margin: 0;
-      color: #000;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
+  h2 {
+    margin: 0;
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .items {
+    flex: 1;
+    overflow: auto;
+    margin: 20px 0;
+
+    &::-webkit-scrollbar {
+      width: 20px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 3px rgb(206, 202, 202); 
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(188, 184, 184, 0.672); 
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgb(188, 184, 184); 
     }
   }
 }
 
+.cartTotal__block {
+  ul {
+    margin-bottom: 40px !important;
+
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+  
+    div {
+      flex: 1;
+      height: 1px;
+      border-bottom: 1px dashed #DFDFDF;
+      position: relative;
+      top: -4px;
+      margin: 0 10px;
+    }
+  }
+
+  .greenBtn {
+    position: relative;
+
+    &:hover {
+      img {
+        transform: translateX(5px);
+      }
+    }
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      transition: transform .15s ease-in-out;
+    }
+  }
+}
+
+.greenBtn {
+  width: 100%;
+  height: 55px;
+  background-color: #9dd558;
+  border-radius: 18px;
+  border: 0;
+  outline: 0;
+  color: #FFF;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+
+  &:hover {
+    background-color: lighten(#9dd558, 5%);
+  }
+
+  &:active {
+    background-color: darken(#9dd558, 5%);
+  }
+}
+
 .cart__item {
-  margin-top: 30px;
+  margin: 30px 10px 0 0;
   border-radius: 20px;
   padding: 20px;
   border: 1px solid #f3f3f3;

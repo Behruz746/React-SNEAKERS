@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { plusIcon, heart, heart_active } from "../assets/index.js";
 
 // card Data
-import cardsObj from "../constants/index.js";
+import cardsObj from "../constants/dataObj.js";
 
 function Cards() {
   return (
@@ -12,16 +12,14 @@ function Cards() {
       {cardsObj.map((data) => {
         return (
           <div className="card" key={uuidv4()}>
-            
             <div className="favorite">
               <img src={heart} alt="heart" />
             </div>
-
             <img width={133} height={112} src={data.image} alt="Shoes image" />
             <h5>{data.title}</h5>
             <div className="d-flex justify-between align-center">
               <div className="d-flex flex-column mt-15">
-                <span>Цена:</span>
+                <span>{data.price}</span>
                 <b>12 999 руб.</b>
               </div>
               <button className="card__btn">
