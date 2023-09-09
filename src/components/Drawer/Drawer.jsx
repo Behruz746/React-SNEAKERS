@@ -10,7 +10,7 @@ import styles from "./Drawer.module.scss";
 function Drawer() {
   return (
     <>
-      <div style={{ display: "block" }} className={styles.overlay}>
+      <div style={{ display: "none" }} className={styles.overlay}>
         <div className={styles.drawer__block}>
           <h2 className="d-flex justify-between">
             Корзина
