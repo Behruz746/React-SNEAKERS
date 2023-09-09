@@ -1,0 +1,121 @@
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+}
+  
+.drawer__block {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 420px;
+     height: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1); 
+    padding: 30px;
+  
+    h2 {
+      margin: 0;
+      color: #000;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  
+    .items {
+      flex: 1;
+      overflow: auto;
+      margin: 20px 0;
+  
+      &::-webkit-scrollbar {
+        width: 20px;
+      }
+  
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 3px rgb(206, 202, 202); 
+        border-radius: 5px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background: rgba(188, 184, 184, 0.672); 
+        border-radius: 5px;
+      }
+  
+      &::-webkit-scrollbar-thumb:hover {
+        background: rgb(188, 184, 184); 
+      }
+    }
+  }
+  
+  .cartTotal__block {
+    ul {
+      margin-bottom: 40px !important;
+  
+      li {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 20px;
+      }
+    
+      div {
+        flex: 1;
+        height: 1px;
+        border-bottom: 1px dashed #DFDFDF;
+        position: relative;
+        top: -4px;
+        margin: 0 10px;
+      }
+    }
+  }
+  
+  .cart__item_img {
+    background-position: -1px -3px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+  }
+
+.cart__item {
+    display: flex;
+    align-items: center;
+    margin: 30px 10px 20px 0;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #f3f3f3;
+    overflow: hidden;
+  
+    p {
+      color: #000;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin: 0;
+    }
+  
+    b {
+      color: #000;
+      font-size: 14px;
+      font-style: normal; 
+      font-weight: 700;
+      line-height: normal;
+    }
+  
+    .remove__btn {
+      opacity: .7;
+      transition: opacity .15s ease-in-out;
+      cursor: pointer;
+  
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }

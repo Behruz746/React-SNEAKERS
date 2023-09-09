@@ -1,10 +1,17 @@
-import { remove_btn, shoes01, arrow } from '../assets/index';
+// Buttun component
+import GreenBtn from "../GreenBtn";
+
+// Images
+import { remove_btn, shoes01 } from "../../assets/index";
+
+// Styles
+import styles from "./Drawer.module.scss";
 
 function Drawer() {
   return (
     <>
-      <div style={{ display: "none" }} className="overlay">
-        <div className="drawer__block">
+      <div style={{ display: "block" }} className={styles.overlay}>
+        <div className={styles.drawer__block}>
           <h2 className="d-flex justify-between">
             Корзина
             <img
@@ -16,11 +23,11 @@ function Drawer() {
             />
           </h2>
 
-          <div className="items">
-            <div className="cart__item d-flex align-center mb-20">
+          <div className={styles.items}>
+            <div className={styles.cart__item}>
               <div
                 style={{ backgroundImage: `url(${shoes01})` }}
-                className="cart__item-img"
+                className={styles.cart__item_img}
               ></div>
 
               <div className="mr-20 flex">
@@ -33,13 +40,13 @@ function Drawer() {
                 height={32}
                 src={remove_btn}
                 alt="Remove btn"
-                className="remove__btn"
+                className={styles.remove__btn}
               />
             </div>
-            <div className="cart__item d-flex align-center mb-20">
+            <div className={styles.cart__item}>
               <div
                 style={{ backgroundImage: `url(${shoes01})` }}
-                className="cart__item-img"
+                className={styles.cart__item_img}
               ></div>
 
               <div className="mr-20 flex">
@@ -52,13 +59,13 @@ function Drawer() {
                 height={32}
                 src={remove_btn}
                 alt="Remove btn"
-                className="remove__btn"
+                className={styles.remove__btn}
               />
             </div>
-            <div className="cart__item d-flex align-center mb-20">
+            <div className={styles.cart__item}>
               <div
                 style={{ backgroundImage: `url(${shoes01})` }}
-                className="cart__item-img"
+                className={styles.cart__item_img}
               ></div>
 
               <div className="mr-20 flex">
@@ -71,12 +78,31 @@ function Drawer() {
                 height={32}
                 src={remove_btn}
                 alt="Remove btn"
-                className="remove__btn"
+                className={styles.remove__btn}
+              />
+            </div>
+            <div className={styles.cart__item}>
+              <div
+                style={{ backgroundImage: `url(${shoes01})` }}
+                className={styles.cart__item_img}
+              ></div>
+
+              <div className="mr-20 flex">
+                <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
+                <b>12 999 руб.</b>
+              </div>
+
+              <img
+                width={32}
+                height={32}
+                src={remove_btn}
+                alt="Remove btn"
+                className={styles.remove__btn}
               />
             </div>
           </div>
 
-          <div className="cartTotal__block">
+          <div className={styles.cartTotal__block}>
             <ul>
               <li>
                 <span>Итого:</span>
@@ -89,10 +115,7 @@ function Drawer() {
                 <b>1074 руб.</b>
               </li>
             </ul>
-            <button className="greenBtn">
-              Оформить заказ
-              <img src={arrow} alt="Arrow" />
-            </button>
+            <GreenBtn title={"Оформить заказ"} />
           </div>
         </div>
       </div>

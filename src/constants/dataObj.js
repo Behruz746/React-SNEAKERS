@@ -1,26 +1,25 @@
 import { shoes01, shoes02, shoes03, shoes04 } from "../assets/index";
-let price = "ЦЕНА:";
 
 const cardsObj = [
   {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
+    name: "Мужские Кроссовки Nike Blazer Mid Suede",
     image: shoes02,
-    price: price,
+    price: "12 999",
   },
   {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
+    name: "Мужские Кроссовки Nike Air Max 270",
     image: shoes04,
-    price: price,
+    price: "8 499",
   },
   {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
+    name: "Мужские Кроссовки Nike Blazer Mid Suede",
     image: shoes03,
-    price: price,
+    price: "12 999",
   },
   {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
+    name: "Кроссовки Puma X Aka Boku Future Rider",
     image: shoes01,
-    price: price, 
+    price: "8 999 ",
   },
 ];
 

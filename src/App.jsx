@@ -1,7 +1,7 @@
 // Components
-import Drawer from "./components/Drawer";
+import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header";
-import Cards from "./components/Cards";
+import Cards from "./components/Card/Cards";
 
 // Images
 import { search } from "./assets/index.js";
@@ -21,7 +21,7 @@ function App() {
           </div>
         </div>
 
-        <Cards />
+        <Cards onClick={() => console.log("Hello")} />
       </div>
     </div>
   );
