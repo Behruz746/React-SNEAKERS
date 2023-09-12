@@ -1,10 +1,13 @@
-import { logo01, korzinka, user } from '../assets/index';
+import { logo01, korzinka, user } from '../../assets/index';
+
+// Styles 
+import styles from './Header.module.scss';
 
 function Header() {
   return (
     <>
       <header className="d-flex justify-between align-center p-45">
-        <div className="header__left d-flex align-center">
+        <div className={`${styles.header__left} d-flex align-center`}>
           <img
             width={40}
             height={40}
@@ -12,13 +15,13 @@ function Header() {
             alt="logo"
             className="mr-15"
           />
-          <div className="header__info">
-            <h3 className="header__title">REACT SNEAKERS</h3>
-            <p className="header__text">Магазин лучших кроссовок</p>
+          <div className={styles.header__info}>
+            <h3 className={styles.header__title}>REACT SNEAKERS</h3>
+            <p className={styles.header__text}>Магазин лучших кроссовок</p>
           </div>
         </div>
 
-        <ul className="header__right d-flex align-center">
+        <ul className={`${styles.header__right} d-flex align-center`}>
           <li className="mr-30 d-flex align-center">
             <img
               width={18}

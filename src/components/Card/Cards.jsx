@@ -15,7 +15,7 @@ function Cards(props) {
       {cardsObj.map((data) => {
         return (
           <div className={styles.card} key={uuidv4()}>
-            <div className={styles.favorite}>
+            <div className={styles.favorite} onClick={props.onClickFavorite}> 
               <img src={heart} alt="heart" />
             </div>
             <img width={133} height={112} src={data.image} alt="Shoes image" />
@@ -25,7 +25,7 @@ function Cards(props) {
                 <span>ЦЕНА:</span>
                 <b>{data.price}руб.</b>
               </div>
-              <button className={styles.card__btn} onClick={props.onClick}>
+              <button className={styles.card__btn} onClick={props.onClickPlus}>
                 <img width={32} height={32} src={plusIcon} alt="plus icon" />
               </button>
             </div>

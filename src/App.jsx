@@ -1,12 +1,17 @@
 // Components
 import Drawer from "./components/Drawer/Drawer";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Cards from "./components/Card/Cards";
 
 // Images
 import { search } from "./assets/index.js";
+import { useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  const num = 0;
+
   return (
     <div className="wrapper clear">
       <Drawer />
@@ -21,7 +26,10 @@ function App() {
           </div>
         </div>
 
-        <Cards onClick={() => console.log("Hello")} />
+        <Cards
+          onClickFavorite={() => console.log("Hello")}
+          onClickPlus={() => console.log("Hello")}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 // Buttun component
-import GreenBtn from "../GreenBtn";
+import GreenBtn from "../GreenButton/GreenBtn";
 
 // Images
 import { remove_btn, shoes01 } from "../../assets/index";

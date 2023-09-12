@@ -1,57 +1,57 @@
 .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9;
 }
   
 .drawer__block {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 420px;
-     height: 100%;
-    right: 0;
-    background-color: #fff;
-    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1); 
-    padding: 30px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 420px;
+  height: 100%;
+  right: 0;
+  background-color: #fff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1); 
+  padding: 30px;
   
-    h2 {
-      margin: 0;
-      color: #000;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
+  h2 {
+    margin: 0;
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .items {
+    flex: 1;
+    overflow: auto;
+    margin: 20px 0;
+
+    &::-webkit-scrollbar {
+      width: 20px;
     }
-  
-    .items {
-      flex: 1;
-      overflow: auto;
-      margin: 20px 0;
-  
-      &::-webkit-scrollbar {
-        width: 20px;
-      }
-  
-      &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 3px rgb(206, 202, 202); 
-        border-radius: 5px;
-      }
-  
-      &::-webkit-scrollbar-thumb {
-        background: rgba(188, 184, 184, 0.672); 
-        border-radius: 5px;
-      }
-  
-      &::-webkit-scrollbar-thumb:hover {
-        background: rgb(188, 184, 184); 
-      }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 3px rgb(206, 202, 202); 
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(188, 184, 184, 0.672); 
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgb(188, 184, 184); 
     }
   }
+}
   
   .cartTotal__block {
     ul {
