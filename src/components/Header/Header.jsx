@@ -3,7 +3,9 @@ import { logo01, korzinka, user } from '../../assets/index';
 // Styles 
 import styles from './Header.module.scss';
 
-function Header() {
+function Header(props) {
+
+
   return (
     <>
       <header className="d-flex justify-between align-center p-45">
@@ -22,7 +24,7 @@ function Header() {
         </div>
 
         <ul className={`${styles.header__right} d-flex align-center`}>
-          <li className="mr-30 d-flex align-center">
+          <li className="mr-30 d-flex align-center cu-p" onClick={props.onClickCart}>
             <img
               width={18}
               height={18}

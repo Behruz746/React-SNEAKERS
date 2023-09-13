@@ -1,12 +1,4 @@
-.Cards {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+
   .card {
     border: 1px solid #f3f3f3;
     padding: 30px;
@@ -27,6 +19,10 @@
         width: 32px;
         height: auto;
       }
+    }
+
+    .plus {
+      cursor: pointer;
     }
   
     span {
@@ -54,15 +50,3 @@
       line-height: normal;
     }
   }
-  
-  .card__btn {
-    background-color: #fff;
-    box-sizing: border-box;
-    border-radius: 8px;
-    width: 32px;
-    height: 32px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-  }
-  

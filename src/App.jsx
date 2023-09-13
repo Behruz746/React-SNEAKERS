@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
+
 // Components
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
@@ -5,17 +8,28 @@ import Cards from "./components/Card/Cards";
 
 // Images
 import { search } from "./assets/index.js";
-import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [cartOpened, setCartOpened] = useState(false);
+  const [items, setItems] = useState([]);
 
-  const num = 0;
+  useEffect(() => {
+    fetch("https://6501e20c736d26322f5c6ebd.mockapi.io/items")
+      .then((data) => data.json())
+      .then((data) => {
+        setItems(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      <Header onClickCart={() => setCartOpened(true)} />
 
       <div className="content p-45">
         <div className="d-flex justify-between align-center mb-40">
@@ -26,10 +40,16 @@ function App() {
           </div>
         </div>
 
-        <Cards
-          onClickFavorite={() => console.log("Hello")}
-          onClickPlus={() => console.log("Hello")}
-        />
+        <div className="Cards">
+          {items.map((data) => (
+            <Cards
+              title={data.name}
+              price={data.price}
+              image={data.image}
+              key={uuidv4()}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

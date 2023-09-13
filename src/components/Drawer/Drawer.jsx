@@ -7,10 +7,10 @@ import { remove_btn, shoes01 } from "../../assets/index";
 // Styles
 import styles from "./Drawer.module.scss";
 
-function Drawer() {
+function Drawer(props) {
   return (
     <>
-      <div style={{ display: "none" }} className={styles.overlay}>
+      <div className={styles.overlay}>
         <div className={styles.drawer__block}>
           <h2 className="d-flex justify-between">
             Корзина
@@ -20,6 +20,7 @@ function Drawer() {
               src={remove_btn}
               alt="Remove btn"
               className="cu-p"
+              onClick={()=> {props.onClose()}}
             />
           </h2>
 
