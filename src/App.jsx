@@ -13,6 +13,7 @@ import { useEffect } from "react";
 function App() {
   const [cartOpened, setCartOpened] = useState(false);
   const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     fetch("https://6501e20c736d26322f5c6ebd.mockapi.io/items")
@@ -26,9 +27,17 @@ function App() {
       });
   }, []);
 
+  const onAddToCart = (obj) => {   
+    if(!cartItems.includes(obj)) {
+      setCartItems((prev) => [...prev, obj]); // reactda push qilish
+    }
+  };
+
   return (
     <div className="wrapper clear">
-      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      {cartOpened && (
+        <Drawer onClose={() => setCartOpened(false)} cartItems={cartItems} />
+      )}
       <Header onClickCart={() => setCartOpened(true)} />
 
       <div className="content p-45">
@@ -46,6 +55,7 @@ function App() {
               title={data.name}
               price={data.price}
               image={data.image}
+              onPlus={() => onAddToCart(data)}
               key={uuidv4()}
             />
           ))}
