@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // Style
 import styles from "./Card.module.scss";
@@ -9,13 +9,13 @@ import {
   heart_active, // plusChecket rasmni import qiling
 } from "../../assets/index.js";
 
-function Cards({ title, image, price, onPlus }) {
+function Cards({ title, image, price, onPlus}) {
   const [isAdded, setIsAdded] = useState(false);
 
   const onClickPlus = () => {
     setIsAdded(!isAdded);
     console.log(isAdded);
-    onPlus();
+    onPlus(setIsAdded);
   };
 
   return (

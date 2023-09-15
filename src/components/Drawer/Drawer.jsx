@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 // Buttun component
 import GreenBtn from "../GreenButton/GreenBtn";
 
@@ -8,6 +10,7 @@ import { remove_btn, shoes01 } from "../../assets/index";
 import styles from "./Drawer.module.scss";
 
 function Drawer({ onClose, cartItems = [] }) {
+
   return (
     <>
       <div className={styles.overlay}>
@@ -28,7 +31,7 @@ function Drawer({ onClose, cartItems = [] }) {
 
           <div className={styles.items}>
             {cartItems.map((data) => (
-              <div className={styles.cart__item}>
+              <div className={styles.cart__item} key={uuidv4()}>
                 <div
                   style={{ backgroundImage: `url(${data.image})` }}
                   className={styles.cart__item_img}
@@ -45,6 +48,11 @@ function Drawer({ onClose, cartItems = [] }) {
                   src={remove_btn}
                   alt="Remove btn"
                   className={styles.remove__btn}
+                  onClick={(e)=> {
+                    console.log(e.target.parentElement);
+                    console.log("data is:", data);
+                    e.target.parentElement.remove();
+                  }}
                 />
               </div>
             ))}
