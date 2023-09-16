@@ -12,7 +12,7 @@ function GreenBtn({ title }) {
         <img src={arrow} alt="Arrow" />
       </button>
     </>
-  );
+  ); 
 }
 
 export default GreenBtn;

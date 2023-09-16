@@ -9,8 +9,7 @@ import { remove_btn, shoes01 } from "../../assets/index";
 // Styles
 import styles from "./Drawer.module.scss";
 
-function Drawer({ onClose, cartItems = [] }) {
-
+function Drawer({ onClose, cartItems = [], onRemove }) {
   return (
     <>
       <div className={styles.overlay}>
@@ -29,50 +28,75 @@ function Drawer({ onClose, cartItems = [] }) {
             />
           </h2>
 
-          <div className={styles.items}>
-            {cartItems.map((data) => (
-              <div className={styles.cart__item} key={uuidv4()}>
-                <div
-                  style={{ backgroundImage: `url(${data.image})` }}
-                  className={styles.cart__item_img}
-                ></div>
+          {cartItems.length > 0 ? (
+            <div>
+              <div className={styles.items}>
+                {cartItems.map((data) => (
+                  <div className={styles.cart__item} key={uuidv4()}>
+                    <div
+                      style={{ backgroundImage: `url(${data.image})` }}
+                      className={styles.cart__item_img}
+                    ></div>
 
-                <div className="mr-20 flex">
-                  <p className="mb-5">{data.name}</p>
-                  <b>{data.price} руб.</b>
-                </div>
+                    <div className="mr-20 flex">
+                      <p className="mb-5">{data.name}</p>
+                      <b>{data.price} руб.</b>
+                    </div>
 
-                <img
-                  width={32}
-                  height={32}
-                  src={remove_btn}
-                  alt="Remove btn"
-                  className={styles.remove__btn}
-                  onClick={(e)=> {
-                    console.log(e.target.parentElement);
-                    console.log("data is:", data);
-                    e.target.parentElement.remove();
-                  }}
-                />
+                    <img
+                      width={32}
+                      height={32}
+                      src={remove_btn}
+                      alt="Remove btn"
+                      className={styles.remove__btn}
+                      onClick={(e) => {
+                        onRemove(data.id);
+                      }}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className={styles.cartTotal__block}>
-            <ul>
-              <li>
-                <span>Итого:</span>
-                <div></div>
-                <b>21 498 руб.</b>
-              </li>
-              <li>
-                <span>Налог 5%:</span>
-                <div></div>
-                <b>1074 руб.</b>
-              </li>
-            </ul>
-            <GreenBtn title={"Оформить заказ"} />
-          </div>
+              <div className={styles.cartTotal__block}>
+                <ul>
+                  <li>
+                    <span>Итого:</span>
+                    <div></div>
+                    <b>21 498 руб.</b>
+                  </li>
+                  <li>
+                    <span>Налог 5%:</span>
+                    <div></div>
+                    <b>1074 руб.</b>
+                  </li>
+                </ul>
+                <GreenBtn title={"Оформить заказ"} />
+              </div>
+            </div>
+          ) : (
+            <div className="cartEmpty d-flex align-center justify-center flex-column flex">
+              <img
+                className="mb-20"
+                width={120}
+                height={120}
+                src="./img/boxImg.png"
+                alt="empty image"
+              />
+              <h2>Корзина пустая</h2>
+              <p className="opacity-6">
+                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
+              </p>
+              <button
+                className="greenButton"
+                onClick={() => {
+                  onClose();
+                }}
+              >
+                <img src="./img/arrowLeft.png" alt="arrow icon" />
+                Вернуться назад
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>
