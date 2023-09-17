@@ -3,9 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 // Buttun component
 import GreenBtn from "../GreenButton/GreenBtn";
 
-// Images
-import { remove_btn, shoes01 } from "../../assets/index";
-
 // Styles
 import styles from "./Drawer.module.scss";
 
@@ -19,7 +16,7 @@ function Drawer({ onClose, cartItems = [], onRemove }) {
             <img
               width={32}
               height={32}
-              src={remove_btn}
+              src='./img/remove_btn.svg'
               alt="Remove btn"
               className="cu-p"
               onClick={() => {
@@ -49,7 +46,7 @@ function Drawer({ onClose, cartItems = [], onRemove }) {
                       src={remove_btn}
                       alt="Remove btn"
                       className={styles.remove__btn}
-                      onClick={(e) => {
+                      onClick={() => {
                         onRemove(data.id);
                       }}
                     />

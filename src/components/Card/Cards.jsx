@@ -3,25 +3,37 @@ import { useState, useEffect, useContext } from "react";
 // Style
 import styles from "./Card.module.scss";
 
-function Cards({ name, image, price, onPlus, onFavorite }) {
+function Cards({
+  id,
+  name,
+  image,
+  price, 
+  onPlus,
+  onFavorite,
+  favorited = false,
+}) {
   const [isAdded, setIsAdded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(favorited);
 
   const onClickPlus = () => {
     setIsAdded(!isAdded);
     onPlus(setIsAdded);
   };
 
-  const onClickLike = ()=> {
-    onFavorite();
+  const onClickLike = () => {
     setIsFavorite(!isFavorite);
+    onFavorite({ name, image, price });
   };
 
   return (
     <>
       <div className={styles.card}>
         <div className={styles.favorite}>
-          <img  src={isFavorite ? "./img/heart-active.svg" : "./img/heart.svg"} alt="heart" onClick={onClickLike} />
+          <img
+            src={isFavorite ? "./img/heart-active.svg" : "./img/heart.svg"}
+            alt="heart"
+            onClick={onClickLike}
+          />
         </div>
         <img width={133} height={112} src={image} alt="Shoes image" />
         <h5>{name}</h5>

@@ -117,15 +117,13 @@ body {
 
 .Cards {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
   margin-top: 40px;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
 }
 
-@media screen and (max-width: 1100px) {
-  .Cards {
-    justify-content: center;
-  }
-}
+// @media screen and (max-width: 1100px) {
+//   .Cards {
+    // justify-content: center;
+//   }
+// }

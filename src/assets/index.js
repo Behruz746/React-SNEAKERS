@@ -1,8 +1,6 @@
 import logo01 from "./png/logo01.png";
 import korzinka from "./svg/karzinka.svg";
 import user from "./svg/user.svg";
-import search from "./svg/search.svg";
-import remove_btn from "./svg/remove-btn.svg";
 import arrow from "./svg/arrow.svg";
 
 import shoes01 from "./png/shoes01.png";
@@ -14,9 +12,7 @@ export {
   logo01,
   korzinka,
   user,
-  remove_btn,
   arrow,
-  search,
   shoes01,
   shoes02,
   shoes03,
