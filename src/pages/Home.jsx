@@ -11,7 +11,23 @@ function Home({
   onChangeSearchInput,
   onFavorites,
   onAddToCart,
+  dataLoad,
 }) {
+  const renderItems = () => {
+    const filteredItems = items.filter((data) =>
+      data.name.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())
+    );
+    return (dataLoad ? [...Array(8)] : filteredItems).map((data, index) => (
+      <Cards
+        key={index}
+        onFavorite={() => onFavorites(data)}
+        onPlus={() => onAddToCart(data)}
+        added={cartItems.some((obj) => Number(obj.id) === Number(data.id))} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda
+        dataLoad={dataLoad}
+        {...data}
+      />
+    ));
+  };
   return (
     <>
       <div className="content p-45">
@@ -31,7 +47,6 @@ function Home({
                 onClick={() => setSearchVal("")}
               />
             )}
-
             <input
               onChange={onChangeSearchInput}
               type="text"
@@ -42,23 +57,7 @@ function Home({
         </div>
 
         <div className="Cards">
-          <>
-            {items
-              .filter((data) =>
-                data.name
-                  .toLocaleLowerCase()
-                  .includes(searchVal.toLocaleLowerCase())
-              )
-              .map((data, index) => (
-                <Cards
-                  key={index}
-                  onFavorite={() => onFavorites(data)}
-                  onPlus={() => onAddToCart(data)}
-                  added={cartItems.some((obj)=> Number(obj.id) === Number(data.id))} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda 
-                  {...data}
-                />
-              ))}
-          </>
+          <>{renderItems()}</>
         </div>
       </div>
     </>

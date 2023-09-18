@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import ContentLoader from "react-content-loader";
 
 // Style
 import styles from "./Card.module.scss";
@@ -7,11 +8,12 @@ function Cards({
   id,
   name,
   image,
-  price, 
+  price,
   onPlus,
   onFavorite,
   favorited = false,
   added = false,
+  dataLoad,
 }) {
   const [isAdded, setIsAdded] = useState(added);
   const [isFavorite, setIsFavorite] = useState(favorited);
@@ -23,37 +25,56 @@ function Cards({
 
   const onClickLike = () => {
     setIsFavorite(!isFavorite);
-    onFavorite({ name, image, price, id });  
+    onFavorite({ name, image, price, id });
   };
-  
-  
+
   return (
     <>
       <div className={styles.card}>
-        <div className={styles.favorite}>
-          <img
-            src={isFavorite ? "./img/heart-active.svg" : "./img/heart.svg"}
-            alt="heart"
-            onClick={onClickLike}
-          />
-        </div>
-        <img width={133} height={112} src={image} alt="Shoes image" />
-        <h5>{name}</h5>
-        <div className="d-flex justify-between align-center">
-          <div className="d-flex flex-column mt-15">
-            <span>ЦЕНА:</span>
-            <b>{price}руб.</b>
-          </div>
+        {dataLoad ? (
+          <ContentLoader
+            speed={2}
+            width={150}
+            height={187}
+            viewBox="0 0 150 187"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#ecebeb"
+          >
+            <circle cx="31" cy="31" r="15" />
+            <rect x="0" y="123" rx="8" ry="8" width="93" height="15" />
+            <rect x="0" y="99" rx="8" ry="8" width="150" height="15" />
+            <rect x="0" y="0" rx="10" ry="10" width="150" height="90" />
+            <rect x="117" y="139" rx="8" ry="8" width="32" height="32" />
+            <rect x="0" y="149" rx="8" ry="8" width="80" height="24" />
+          </ContentLoader>
+        ) : (
+          <>
+            <div className={styles.favorite}>
+              <img
+                src={isFavorite ? "./img/heart-active.svg" : "./img/heart.svg"}
+                alt="heart"
+                onClick={onClickLike}
+              />
+            </div>
+            <img width={133} height={112} src={image} alt="Shoes image" />
+            <h5>{name}</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column mt-15">
+                <span>ЦЕНА:</span>
+                <b>{price}руб.</b>
+              </div>
 
-          <img
-            className={styles.plus}
-            onClick={onClickPlus}
-            width={32}
-            height={32}
-            src={isAdded ? "./img/btn-checked.svg" : "./img/plusIcon.svg"}
-            alt="plus icon"
-          />
-        </div>
+              <img
+                className={styles.plus}
+                onClick={onClickPlus}
+                width={32}
+                height={32}
+                src={isAdded ? "./img/btn-checked.svg" : "./img/plusIcon.svg"}
+                alt="plus icon"
+              />
+            </div>
+          </>
+        )}
       </div>
     </>
   );

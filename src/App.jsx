@@ -17,23 +17,23 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [dataLoad, setDataLoad] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       // Fetch short in axios
-      const itemsRespons = await axios.get(
-        "https://6501e20c736d26322f5c6ebd.mockapi.io/items"
-      );
-      const cartRespons = await axios.get(
-        "https://6501e20c736d26322f5c6ebd.mockapi.io/cart"
-      );
-      const favoriteRespons = await axios.get(
-        "https://6506d69d3a38daf4803ec489.mockapi.io/favorites"
-      );
+      setDataLoad(true)
+      const [cartResponse, favoritesResponse, itemsResponse] =
+        await Promise.all([
+          axios.get("https://6501e20c736d26322f5c6ebd.mockapi.io/cart"),
+          axios.get("https://6506d69d3a38daf4803ec489.mockapi.io/favorites"),
+          axios.get("https://6501e20c736d26322f5c6ebd.mockapi.io/items"),
+        ]);
 
-      setCartItems(cartRespons.data);
-      setFavorites(favoriteRespons.data);
-      setItems(itemsRespons.data);
+      setDataLoad(false);
+      setCartItems(cartResponse.data);
+      setFavorites(favoritesResponse.data);
+      setItems(itemsResponse.data);
     }
 
     fetchData();
@@ -64,11 +64,13 @@ function App() {
   };
 
   const onFavorites = async (obj) => {
+    console.log(obj.id);
     try {
-      if (favorites.find((fav) => fav.id === obj.id)) {
+      if (favorites.find((fav) => Number(fav.id) === Number(obj.id))) {
         axios.delete(
           `https://6506d69d3a38daf4803ec489.mockapi.io/favorites/${obj.id}`
         );
+        // setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id))); // delete favorite cards
       } else {
         const { data } = await axios.post(
           "https://6506d69d3a38daf4803ec489.mockapi.io/favorites",
@@ -111,6 +113,7 @@ function App() {
               onChangeSearchInput={onChangeSearchInput}
               onFavorites={onFavorites}
               onAddToCart={onAddToCart}
+              dataLoad={dataLoad}
             />
           }
         />
