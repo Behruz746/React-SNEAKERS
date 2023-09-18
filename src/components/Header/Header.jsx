@@ -3,8 +3,24 @@ import { Link } from "react-router-dom";
 
 // Styles
 import styles from "./Header.module.scss";
+import { useEffect, useState } from "react";
 
-function Header(props) {
+function Header({ onClickCart, cartItems }) {
+  console.log(cartItems);
+
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    let totalNumbers = 0;
+
+    for (let i = 0; i < cartItems.length; i++) {
+      const price = Number(cartItems[i].price.replace(/\s/g, ""));
+      totalNumbers += price;
+    }
+
+    setNumber(totalNumbers);
+  }, [cartItems]);
+
   return (
     <>
       <header className="d-flex justify-between align-center p-45">
@@ -25,10 +41,7 @@ function Header(props) {
         </Link>
 
         <ul className={`${styles.header__right} d-flex align-center`}>
-          <li
-            className="mr-30 d-flex align-center cu-p"
-            onClick={props.onClickCart}
-          >
+          <li className="mr-30 d-flex align-center cu-p" onClick={onClickCart}>
             <img
               width={18}
               height={18}
@@ -36,7 +49,8 @@ function Header(props) {
               alt="cor logo"
               className="mr-5"
             />
-            <span>1205 руб.</span>
+            {/* <span>1205 руб.</span> */}
+            <span> {number ? `${number} руб.` : "0 руб."}</span>
           </li>
           <li className="mr-20 cu-p">
             <Link to="/favorites">

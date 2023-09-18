@@ -5,6 +5,7 @@ import Cards from "../components/Card/Cards";
 
 function Home({
   items,
+  cartItems,
   searchVal,
   setSearchVal,
   onChangeSearchInput,
@@ -19,7 +20,7 @@ function Home({
             {searchVal ? `Поиск по запросу: "${searchVal}"` : "Все кроссовки"}
           </h1>
           <div className="search__block d-flex">
-            <img src={'./img/search.svg'} alt="Search" />
+            <img src={"./img/search.svg"} alt="Search" />
             {searchVal && (
               <img
                 width={32}
@@ -48,12 +49,12 @@ function Home({
                   .toLocaleLowerCase()
                   .includes(searchVal.toLocaleLowerCase())
               )
-
               .map((data, index) => (
                 <Cards
                   key={index}
                   onFavorite={() => onFavorites(data)}
                   onPlus={() => onAddToCart(data)}
+                  added={cartItems.some((obj)=> Number(obj.id) === Number(data.id))} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda 
                   {...data}
                 />
               ))}

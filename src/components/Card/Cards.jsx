@@ -11,20 +11,22 @@ function Cards({
   onPlus,
   onFavorite,
   favorited = false,
+  added = false,
 }) {
-  const [isAdded, setIsAdded] = useState(false);
+  const [isAdded, setIsAdded] = useState(added);
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const onClickPlus = () => {
     setIsAdded(!isAdded);
-    onPlus(setIsAdded);
+    onPlus({ name, image, price, id });
   };
 
   const onClickLike = () => {
     setIsFavorite(!isFavorite);
-    onFavorite({ name, image, price });
+    onFavorite({ name, image, price, id });  
   };
-
+  
+  
   return (
     <>
       <div className={styles.card}>

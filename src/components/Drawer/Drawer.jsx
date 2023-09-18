@@ -12,11 +12,11 @@ function Drawer({ onClose, cartItems = [], onRemove }) {
       <div className={styles.overlay}>
         <div className={styles.drawer__block}>
           <h2 className="d-flex justify-between">
-            Корзина
+            Корзина 
             <img
               width={32}
               height={32}
-              src='./img/remove_btn.svg'
+              src='./img/remove-btn.svg'
               alt="Remove btn"
               className="cu-p"
               onClick={() => {
@@ -26,10 +26,10 @@ function Drawer({ onClose, cartItems = [], onRemove }) {
           </h2>
 
           {cartItems.length > 0 ? (
-            <div>
+            <div className="d-flex flex-column flex">
               <div className={styles.items}>
                 {cartItems.map((data) => (
-                  <div className={styles.cart__item} key={uuidv4()}>
+                  <div className={styles.cart__item} key={data.id}>
                     <div
                       style={{ backgroundImage: `url(${data.image})` }}
                       className={styles.cart__item_img}
@@ -43,7 +43,7 @@ function Drawer({ onClose, cartItems = [], onRemove }) {
                     <img
                       width={32}
                       height={32}
-                      src={remove_btn}
+                      src='./img/remove-btn.svg'
                       alt="Remove btn"
                       className={styles.remove__btn}
                       onClick={() => {

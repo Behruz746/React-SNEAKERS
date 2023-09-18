@@ -19,34 +19,41 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://6501e20c736d26322f5c6ebd.mockapi.io/items")
-      .then((res) => {
-        // Fetch short in axios
-        console.log(res.data);
-        setItems(res.data);
-      });
+    async function fetchData() {
+      // Fetch short in axios
+      const itemsRespons = await axios.get(
+        "https://6501e20c736d26322f5c6ebd.mockapi.io/items"
+      );
+      const cartRespons = await axios.get(
+        "https://6501e20c736d26322f5c6ebd.mockapi.io/cart"
+      );
+      const favoriteRespons = await axios.get(
+        "https://6506d69d3a38daf4803ec489.mockapi.io/favorites"
+      );
 
-    axios
-      .get("https://6501e20c736d26322f5c6ebd.mockapi.io/cart")
-      .then((res) => {
-        // Fetch short in axios
-        console.log(res.data);
-        setCartItems(res.data);
-      });
-    axios
-      .get("https://6506d69d3a38daf4803ec489.mockapi.io/favorites")
-      .then((res) => {
-        // Fetch short in axios
-        console.log(res.data);
-        setFavorites(res.data);
-      });
+      setCartItems(cartRespons.data);
+      setFavorites(favoriteRespons.data);
+      setItems(itemsRespons.data);
+    }
+
+    fetchData();
   }, []);
 
-  const onAddToCart = (obj) => {
-    axios.post("https://6501e20c736d26322f5c6ebd.mockapi.io/cart", obj); // post obj data in beckend server
-    if (!cartItems.includes(obj)) {
-      setCartItems((prev) => [...prev, obj]); // reactda push qilish
+  const onAddToCart = async (obj) => {
+    try {
+      if (cartItems.find((cart) => Number(cart.id) === Number(obj.id))) {
+        setCartItems((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        );
+        axios.delete(
+          `https://6501e20c736d26322f5c6ebd.mockapi.io/cart/${obj.id}`
+        ); // post obj data in beckend server
+      } else {
+        axios.post("https://6501e20c736d26322f5c6ebd.mockapi.io/cart", obj); // post obj data in beckend server
+        setCartItems((prev) => [...prev, obj]);
+      }
+    } catch (error) {
+      console.error("Error: 404");
     }
   };
 
@@ -70,7 +77,7 @@ function App() {
         setFavorites((prev) => [...prev, data]);
       }
     } catch (error) {
-      console.error('Error: 404;');
+      console.error("Error: 404");
     }
   };
 
@@ -89,7 +96,7 @@ function App() {
         />
       )}
 
-      <Header onClickCart={() => setCartOpened(true)} />
+      <Header onClickCart={() => setCartOpened(true)} cartItems={cartItems} />
 
       <Routes>
         <Route
@@ -98,6 +105,7 @@ function App() {
           element={
             <Home
               items={items}
+              cartItems={cartItems}
               searchVal={searchVal}
               setSearchVal={setSearchVal}
               onChangeSearchInput={onChangeSearchInput}
