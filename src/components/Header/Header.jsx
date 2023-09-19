@@ -6,8 +6,6 @@ import styles from "./Header.module.scss";
 import { useEffect, useState } from "react";
 
 function Header({ onClickCart, cartItems }) {
-  console.log(cartItems);
-
   const [number, setNumber] = useState(0);
 
   useEffect(() => {
