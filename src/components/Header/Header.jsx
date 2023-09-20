@@ -1,13 +1,12 @@
-import { logo01, korzinka, user } from "../../assets/index";
+// import { logo01, korzinka, user } from "../../assets/index";
 import { Link } from "react-router-dom";
 
 // Styles
 import styles from "./Header.module.scss";
 import { useEffect, useState } from "react";
 
-function Header({ onClickCart, cartItems }) {
-  const [number, setNumber] = useState(0);
-
+function Header({ onClickCart, cartItems, number, setNumber }) {
+ 
   useEffect(() => {
     let totalNumbers = 0;
 
@@ -18,7 +17,7 @@ function Header({ onClickCart, cartItems }) {
 
     setNumber(totalNumbers);
   }, [cartItems]);
-
+  
   return (
     <>
       <header className="d-flex justify-between align-center p-45">
@@ -27,7 +26,7 @@ function Header({ onClickCart, cartItems }) {
             <img
               width={40}
               height={40}
-              src={logo01}
+              src='./img/Logo01.png'
               alt="logo"
               className="mr-15"
             />
@@ -43,7 +42,7 @@ function Header({ onClickCart, cartItems }) {
             <img
               width={18}
               height={18}
-              src={korzinka}
+              src="./img/korzinka.svg"
               alt="cor logo"
               className="mr-5"
             />
@@ -62,7 +61,7 @@ function Header({ onClickCart, cartItems }) {
           </li>
           <li>
             <Link to="/user">
-              <img width={18} height={18} src={user} alt="user logo" />
+              <img width={18} height={18} src='./img/User.svg' alt="user logo" />
             </Link>
           </li>
         </ul>

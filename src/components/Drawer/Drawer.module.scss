@@ -29,10 +29,11 @@
   }
    
   .items {
-    flex: 1;
-    overflow: auto;
+    // flex: 1;
+    overflow: auto !important;
+    height: 400px !important;
     margin-bottom: 40px;
-    border: 1px solid #d00;
+    margin-top: 20px;
 
     &::-webkit-scrollbar {
       width: 20px;

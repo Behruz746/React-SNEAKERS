@@ -1,7 +1,12 @@
 import React from "react";
+import { useContext } from "react";
 
 // Components
 import Cards from "../components/Card/Cards";
+import AppContext from "../Context";
+
+// AppContext
+// import AppContext from "../Context";
 
 function Home({
   items,
@@ -11,8 +16,9 @@ function Home({
   onChangeSearchInput,
   onFavorites,
   onAddToCart,
-  dataLoad,
 }) {
+  const { dataLoad, isItemsAdded } = useContext(AppContext); // useContext //
+  
   const renderItems = () => {
     const filteredItems = items.filter((data) =>
       data.name.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())
@@ -22,11 +28,11 @@ function Home({
         key={index}
         onFavorite={() => onFavorites(data)}
         onPlus={() => onAddToCart(data)}
-        added={cartItems.some((obj) => Number(obj.id) === Number(data.id))} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda
         dataLoad={dataLoad}
+        added={isItemsAdded(data && data.id)} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda
         {...data}
       />
-    ));
+    )); 
   };
   return (
     <>

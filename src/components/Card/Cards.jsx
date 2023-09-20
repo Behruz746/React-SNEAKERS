@@ -15,17 +15,19 @@ function Cards({
   added = false,
   dataLoad,
 }) {
-  const [isAdded, setIsAdded] = useState(added);
+  const [isAdded, setIsAdded] = useState(false);
+  setTimeout(()=> setIsAdded(added), 10);
   const [isFavorite, setIsFavorite] = useState(favorited);
+  const obj = { name, image, price, id }; // cards data
 
   const onClickPlus = () => {
     setIsAdded(!isAdded);
-    onPlus({ name, image, price, id });
+    onPlus(obj);
   };
 
   const onClickLike = () => {
     setIsFavorite(!isFavorite);
-    onFavorite({ name, image, price, id });
+    onFavorite(obj);
   };
 
   return (
