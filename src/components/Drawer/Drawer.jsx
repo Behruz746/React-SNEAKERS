@@ -16,13 +16,11 @@ import axios from "axios";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ cartItems = [], onRemove, number }) {
-  const { onClose, setCartItems } = useContext(AppContext);
+function Drawer() {
+  const { onClose, setCartItems, cartItems = [], onRemoveItem, number } = useContext(AppContext);
   const [orderId, setOrderId] = useState(null);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(orderId);
 
   const onClickOrder = async () => {
     try {
@@ -36,9 +34,12 @@ function Drawer({ cartItems = [], onRemove, number }) {
       setOrderId(data.id);
       setIsOrderComplete(true);
       setCartItems([]);
-      for (let i = 0; i < cartItems.length; i++) { // server dan jonatilgan malumotni cart serveridan ochirish
+      for (let i = 0; i < cartItems.length; i++) {
+        // server dan jonatilgan malumotni cart serveridan ochirish
         const item = cartItems[i];
-        await axios.delete('https://6501e20c736d26322f5c6ebd.mockapi.io/cart/' + item.id);
+        await axios.delete(
+          "https://6501e20c736d26322f5c6ebd.mockapi.io/cart/" + item.id
+        );
         await delay(1000);
       }
     } catch (err) {
@@ -88,7 +89,7 @@ function Drawer({ cartItems = [], onRemove, number }) {
                         alt="Remove btn"
                         className={styles.remove__btn}
                         onClick={() => {
-                          onRemove(data.id);
+                          onRemoveItem(data.id);
                         }}
                       />
                     </div>

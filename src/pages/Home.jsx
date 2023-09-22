@@ -3,22 +3,22 @@ import { useContext } from "react";
 
 // Components
 import Cards from "../components/Card/Cards";
-import AppContext from "../Context";
 
 // AppContext
-// import AppContext from "../Context";
+import AppContext from "../Context";
 
-function Home({
-  items,
-  cartItems,
-  searchVal,
-  setSearchVal,
-  onChangeSearchInput,
-  onFavorites,
-  onAddToCart,
-}) {
-  const { dataLoad, isItemsAdded } = useContext(AppContext); // useContext //
-  
+function Home() {
+  const {
+    dataLoad,
+    isItemsAdded,
+    searchVal,
+    setSearchVal,
+    items,
+    onChangeSearchInput,
+    onFavorites,
+    onAddToCart,
+  } = useContext(AppContext); // useContext //
+
   const renderItems = () => {
     const filteredItems = items.filter((data) =>
       data.name.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())
@@ -32,7 +32,7 @@ function Home({
         added={isItemsAdded(data && data.id)} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda
         {...data}
       />
-    )); 
+    ));
   };
   return (
     <>

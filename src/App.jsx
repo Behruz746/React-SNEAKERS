@@ -23,9 +23,22 @@ function App() {
   const [dataLoad, setDataLoad] = useState(true);
   const [number, setNumber] = useState(0);
 
-  const onClose = ()=> {
-    setCartOpened(false)
-  }
+  useEffect(() => {
+    let totalNumbers = 0;
+
+    for (let i = 0; i < cartItems.length; i++) {
+      const price = Number(cartItems[i].price.replace(/\s/g, ""));
+      totalNumbers += price;
+    }
+
+    setNumber(totalNumbers);
+  }, [cartItems]);
+
+  console.log(number);
+
+  const onClose = () => {
+    setCartOpened(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -77,7 +90,9 @@ function App() {
         axios.delete(
           `https://6506d69d3a38daf4803ec489.mockapi.io/favorites/${obj.id}`
         );
-        setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id))); // delete favorite cards
+        setFavorites((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        ); // delete favorite cards
       } else {
         const { data } = await axios.post(
           "https://6506d69d3a38daf4803ec489.mockapi.io/favorites",
@@ -85,7 +100,6 @@ function App() {
         );
         setFavorites((prev) => [...prev, data]);
       }
-
     } catch (error) {
       console.error("Error: 404");
     }
@@ -109,43 +123,23 @@ function App() {
         isItemsAdded,
         onClose,
         setCartItems,
+        number,
+        setNumber,
+        searchVal,
+        setSearchVal,
+        onRemoveItem,
+        onChangeSearchInput,
+        onFavorites,
+        onAddToCart,
       }}
     >
       <div className="wrapper clear">
-        {cartOpened && (
-          <Drawer
-           
-            cartItems={cartItems}
-            searchVal={searchVal}
-            onRemove={onRemoveItem}
-            number={number}
-          />
-        )}
+        {cartOpened && <Drawer />}
 
-        <Header
-          onClickCart={() => setCartOpened(true)}
-          cartItems={cartItems}
-          number={number}
-          setNumber={setNumber}
-        />
+        <Header onClickCart={() => setCartOpened(true)} />
 
         <Routes>
-          <Route
-            path="/"
-            exact
-            element={
-              <Home
-                items={items}
-                cartItems={cartItems}
-                searchVal={searchVal}
-                setSearchVal={setSearchVal}
-                onChangeSearchInput={onChangeSearchInput}
-                onFavorites={onFavorites}
-                onAddToCart={onAddToCart}
-                dataLoad={dataLoad}
-              />
-            }
-          />
+          <Route path="/" exact element={<Home />} />
           <Route
             path="/favorites"
             element={<Favorites onFavorites={onFavorites} />}

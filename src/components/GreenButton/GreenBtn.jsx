@@ -1,6 +1,3 @@
-// Icon
-// import { arrow } from "../../assets/index";
-
 // Styles
 import styles from "./Button.module.scss";
 
