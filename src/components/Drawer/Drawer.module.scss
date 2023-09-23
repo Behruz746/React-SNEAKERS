@@ -6,6 +6,11 @@
   top: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 9;
+  visibility: hidden;
+}
+
+.overlayHidden {
+  visibility: visible;
 }
   
 .drawer__block {
@@ -120,3 +125,4 @@
       }
     }
   }
+

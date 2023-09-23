@@ -22,7 +22,7 @@ function Favorites({ onFavorites }) {
               onFavorite={() => onFavorites(data)}
               {...data}
             />
-          ))}
+          ))} 
         </div>
       </div>
     </>

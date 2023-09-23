@@ -10,6 +10,7 @@ import Header from "./components/Header/Header";
 // Pages
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 //Context
 import AppContext from "./Context";
@@ -33,8 +34,6 @@ function App() {
 
     setNumber(totalNumbers);
   }, [cartItems]);
-
-  console.log(number);
 
   const onClose = () => {
     setCartOpened(false);
@@ -92,7 +91,7 @@ function App() {
         );
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
-        ); // delete favorite cards
+        ); // delete favorite cards 
       } else {
         const { data } = await axios.post(
           "https://6506d69d3a38daf4803ec489.mockapi.io/favorites",
@@ -134,7 +133,11 @@ function App() {
       }}
     >
       <div className="wrapper clear">
-        {cartOpened && <Drawer />}
+        {/* {cartOpened && <Drawer />} */}
+
+
+
+        <Drawer opened={cartOpened} />
 
         <Header onClickCart={() => setCartOpened(true)} />
 
@@ -144,6 +147,7 @@ function App() {
             path="/favorites"
             element={<Favorites onFavorites={onFavorites} />}
           />
+          <Route path="/user" element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>

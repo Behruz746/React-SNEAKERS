@@ -16,7 +16,7 @@ function Cards({
   dataLoad,
 }) {
   const [isAdded, setIsAdded] = useState(false);
-  setTimeout(()=> setIsAdded(added), 10);
+  setTimeout(() => setIsAdded(added), 10);
   const [isFavorite, setIsFavorite] = useState(favorited);
   const obj = { name, image, price, id }; // cards data
 
@@ -66,14 +66,16 @@ function Cards({
                 <b>{price}руб.</b>
               </div>
 
-              <img
-                className={styles.plus}
-                onClick={onClickPlus}
-                width={32}
-                height={32}
-                src={isAdded ? "./img/btn-checked.svg" : "./img/plusIcon.svg"}
-                alt="plus icon"
-              />
+              {onPlus && (
+                <img
+                  className={styles.plus}
+                  onClick={onClickPlus}
+                  width={32}
+                  height={32}
+                  src={isAdded ? "./img/btn-checked.svg" : "./img/plusIcon.svg"}
+                  alt="plus icon"
+                />
+              )}
             </div>
           </>
         )}

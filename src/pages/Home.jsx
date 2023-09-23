@@ -48,7 +48,7 @@ function Home() {
                 width={32}
                 height={32}
                 src={"./img/remove-btn.svg"}
-                alt="Remove btn"
+                alt="Remove btn" 
                 className="cu-p clear"
                 onClick={() => setSearchVal("")}
               />

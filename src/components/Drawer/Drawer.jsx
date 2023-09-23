@@ -16,8 +16,14 @@ import axios from "axios";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer() {
-  const { onClose, setCartItems, cartItems = [], onRemoveItem, number } = useContext(AppContext);
+function Drawer({ cartOpened = true }) {
+  const {
+    onClose, 
+    setCartItems,
+    cartItems = [],
+    onRemoveItem,
+    number,
+  } = useContext(AppContext);
   const [orderId, setOrderId] = useState(null);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,9 +54,9 @@ function Drawer() {
     setIsLoading(false);
   };
 
-  return (
+  return ( /// Opened ni video dan top !!!!
     <>
-      <div className={styles.overlay}>
+      <div className={`${cartOpened ? styles.overlayHidden : '' } ${styles.overlay}`}>
         <div className={styles.drawer__block}>
           <h2 className="d-flex justify-between">
             Корзина
