@@ -62,6 +62,7 @@ function Orders() {
                 image="./img/imoji-upsit.png"
                 title="У вас нет заказов"
                 text="Вы нищеброд?  Оформите хотя бы один заказ."
+                link={true}
               />
             </div>
           )}

@@ -25,3 +25,31 @@
     }
   }
 }
+
+.info__link {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 250px;
+  height: 55px;
+  padding: 15px 5px;
+  background-color: #9DD458;
+  border-radius: 18px;
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 600;
+
+  &:hover {
+    img {
+      transform: translateX(-5px);
+    }
+  }
+
+  img { 
+    transition: transform .15s ease-in-out;
+    width: 14px;
+    height: auto;
+  }
+}

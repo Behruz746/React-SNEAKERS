@@ -29,9 +29,6 @@ function Cards({
     setIsFavorite(!isFavorite);
     onFavorite(obj);
   };
-  
-  // console.log(obj.parentId);
-  // console.log(isItemAdded(id));
 
   return (
     <>
