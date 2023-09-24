@@ -43,17 +43,23 @@ function App() {
     async function fetchData() {
       // Fetch short in axios
       setDataLoad(true);
-      const [cartResponse, favoritesResponse, itemsResponse] =
-        await Promise.all([
-          axios.get("https://6501e20c736d26322f5c6ebd.mockapi.io/cart"),
-          axios.get("https://6506d69d3a38daf4803ec489.mockapi.io/favorites"),
-          axios.get("https://6501e20c736d26322f5c6ebd.mockapi.io/items"),
-        ]);
 
-      setCartItems(cartResponse.data);
-      setFavorites(favoritesResponse.data);
-      setItems(itemsResponse.data);
-      setDataLoad(false);
+      try {
+        const [cartResponse, favoritesResponse, itemsResponse] =
+          await Promise.all([
+            axios.get("https://6501e20c736d26322f5c6ebd.mockapi.io/cart"),
+            axios.get("https://6506d69d3a38daf4803ec489.mockapi.io/favorites"),
+            axios.get("https://6501e20c736d26322f5c6ebd.mockapi.io/items"),
+          ]);
+
+        setCartItems(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
+        setDataLoad(false);
+      } catch (error) {
+        console.log("Error: 404");
+        console.error(error);
+      }
     }
 
     fetchData();
@@ -61,16 +67,26 @@ function App() {
 
   const onAddToCart = async (obj) => {
     try {
-      if (cartItems.find((cart) => Number(cart.id) === Number(obj.id))) {
+      const findItem = cartItems.find((cart) => Number(cart.parentId) === Number(obj.id));
+      if (findItem) {
         setCartItems((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id))
+          prev.filter((item) => Number(item.parentId) !== Number(obj.id))
         );
-        axios.delete(
-          `https://6501e20c736d26322f5c6ebd.mockapi.io/cart/${Number(obj.id)}`
+        await axios.delete(
+          `https://6501e20c736d26322f5c6ebd.mockapi.io/cart/${Number(findItem.id)}`
         ); // post obj data in beckend server
       } else {
-        axios.post("https://6501e20c736d26322f5c6ebd.mockapi.io/cart", obj); // post obj data in beckend server
         setCartItems((prev) => [...prev, obj]);
+        const {data} = await axios.post("https://6501e20c736d26322f5c6ebd.mockapi.io/cart", obj); // post obj data in beckend server
+        setCartItems((prev) => prev.map(item=> {
+          if(item.parentId === data.parentId) {
+            return {
+              ...item,
+              id: data.id
+            };
+          };
+          return item;
+        }));
       }
     } catch (error) {
       console.error("Error: 404");
@@ -78,8 +94,13 @@ function App() {
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`https://6501e20c736d26322f5c6ebd.mockapi.io/cart/${id}`); // delete obj data in beckend server
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    try {
+      axios.delete(`https://6501e20c736d26322f5c6ebd.mockapi.io/cart/${id}`); // delete obj data in beckend server
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
+    } catch (error) {
+      console.log("Error: 404");
+      console.error(error);
+    }
   };
 
   const onFavorites = async (obj) => {
@@ -91,7 +112,7 @@ function App() {
         );
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) !== Number(obj.id))
-        ); // delete favorite cards 
+        ); // delete favorite cards
       } else {
         const { data } = await axios.post(
           "https://6506d69d3a38daf4803ec489.mockapi.io/favorites",
@@ -108,8 +129,8 @@ function App() {
     setSearchVal(event.target.value); // search value
   };
 
-  const isItemsAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  const isItemAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (
@@ -119,7 +140,7 @@ function App() {
         cartItems,
         favorites,
         dataLoad,
-        isItemsAdded,
+        isItemAdded,
         onClose,
         setCartItems,
         number,
@@ -130,15 +151,11 @@ function App() {
         onChangeSearchInput,
         onFavorites,
         onAddToCart,
+        cartOpened,
       }}
     >
       <div className="wrapper clear">
-        {/* {cartOpened && <Drawer />} */}
-
-
-
-        <Drawer opened={cartOpened} />
-
+        <Drawer />
         <Header onClickCart={() => setCartOpened(true)} />
 
         <Routes>

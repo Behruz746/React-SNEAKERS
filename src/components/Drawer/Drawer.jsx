@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
 import { useContext, useState } from "react";
+import axios from "axios";
 
 // Buttun component
 import GreenBtn from "../GreenButton/GreenBtn";
@@ -12,17 +12,17 @@ import styles from "./Drawer.module.scss";
 
 // AppContext
 import AppContext from "../../Context";
-import axios from "axios";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ cartOpened = true }) {
+function Drawer() {
   const {
-    onClose, 
+    onClose,
     setCartItems,
     cartItems = [],
     onRemoveItem,
     number,
+    cartOpened,
   } = useContext(AppContext);
   const [orderId, setOrderId] = useState(null);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
@@ -54,9 +54,13 @@ function Drawer({ cartOpened = true }) {
     setIsLoading(false);
   };
 
-  return ( /// Opened ni video dan top !!!!
+  return (
     <>
-      <div className={`${cartOpened ? styles.overlayHidden : '' } ${styles.overlay}`}>
+      <div
+        className={`${cartOpened ? styles.overlayHidden : ""} ${
+          styles.overlay
+        }`}
+      >
         <div className={styles.drawer__block}>
           <h2 className="d-flex justify-between">
             Корзина

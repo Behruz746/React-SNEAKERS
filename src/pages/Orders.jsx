@@ -16,13 +16,13 @@ function Orders() {
     (async () => {
       try {
         const { data } = await axios.get(
-          "https://6506d69d3a38daf4803ec489.mockapi.io/orde"
+          "https://6506d69d3a38daf4803ec489.mockapi.io/orderCart"
         );
         setOrderData(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
         console.log(orderData);
       } catch (error) {
-        // alert("Ошибка при запросе заказов");
+        alert("Ошибка при запросе заказов");
         console.error(error);
       }
     })();
@@ -55,13 +55,17 @@ function Orders() {
           </div>
         </div>
       ) : (
-        <div className="info__container">
-          <Info
-            image="./img/imoji-upsit.png"
-            title="У вас нет заказов"
-            text="Вы нищеброд?   Оформите хотя бы один заказ."
-          />
-        </div>
+        <>
+          {!isLoading && (
+            <div className="info__container">
+              <Info
+                image="./img/imoji-upsit.png"
+                title="У вас нет заказов"
+                text="Вы нищеброд?  Оформите хотя бы один заказ."
+              />
+            </div>
+          )}
+        </>
       )}
     </>
   );

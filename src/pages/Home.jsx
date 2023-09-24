@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // Components
 import Cards from "../components/Card/Cards";
@@ -10,7 +11,7 @@ import AppContext from "../Context";
 function Home() {
   const {
     dataLoad,
-    isItemsAdded,
+    isItemAdded,
     searchVal,
     setSearchVal,
     items,
@@ -20,16 +21,15 @@ function Home() {
   } = useContext(AppContext); // useContext //
 
   const renderItems = () => {
-    const filteredItems = items.filter((data) =>
-      data.name.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())
+    const filteredItems = items.filter((item) =>
+      item.name.toLocaleLowerCase().includes(searchVal.toLocaleLowerCase())
     );
     return (dataLoad ? [...Array(8)] : filteredItems).map((data, index) => (
       <Cards
         key={index}
-        onFavorite={() => onFavorites(data)}
-        onPlus={() => onAddToCart(data)}
+        onFavorite={(obj) => onFavorites(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
         dataLoad={dataLoad}
-        added={isItemsAdded(data && data.id)} // agar siz bulva true data ishlatmoqchi bolsangiz yozish shart emas Reactda
         {...data}
       />
     ));
@@ -48,7 +48,7 @@ function Home() {
                 width={32}
                 height={32}
                 src={"./img/remove-btn.svg"}
-                alt="Remove btn" 
+                alt="Remove btn"
                 className="cu-p clear"
                 onClick={() => setSearchVal("")}
               />
